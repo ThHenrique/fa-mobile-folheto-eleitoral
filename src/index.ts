@@ -1,60 +1,30 @@
+import express from 'express'
+import cors from 'cors'
+
 import * as dotenv from 'dotenv'
 dotenv.config();
 
-import fs from 'fs'
-import csv from 'csv-parser'
-import { Writable, Transform } from 'stream'
+import routes from './routes';
 
-import { mongoClient } from './connectMongo'
+import MongoDbClient from './database/index'
 
-const readableStreamFile = fs.createReadStream('../data_csv/candidatos-2022/consulta_cand_2022_SP.csv', {
-	encoding: 'latin1',
-})
-const transformToObject = csv({ separator: ';' })
-const transformToString = new Transform({
-	objectMode: true,
-	transform(chunk, encoding, callback) {
-		callback(null, JSON.stringify(chunk))
-	},
-})
+MongoDbClient
+	.initialize()
 
-const writableStreamFile = new Writable({
-	write(chunk, encoding, next) {
-		const stringifyer = chunk.toString()
-		const rowData = JSON.parse(stringifyer, (key, value: string) => {
-			if (value == '#NULO#' || value == "-1" || value == '#NE#' || value == "-3") {
-				value = null
-			}
-			if (value != null) {
-				if (value === 'S' || value === "N") {
-					return value === 'S'
-				}
-			}
-			return value
-		})
+const PORT = process.env.PORT || 3333
 
-		const database = mongoClient.db('santinhodb')
-		const candidatos = database.collection('candidatos2022')
-		async function handleData(rowData: any) {
-			try {
-				await candidatos.insertOne(rowData)
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		handleData(rowData)
-		// console.log('PROCESSANDO', rowData);
-		next();
-	}
-})
-
-console.log('INICIOU', Date());
-
-readableStreamFile
-	.pipe(transformToObject)
-	.pipe(transformToString)
-	.pipe(writableStreamFile)
-	.on('close', async () => {
-		console.log('FINALIZOU', Date())
+const app = express();
+app.use(express.json());
+app.use(
+	cors({
+		allowedHeaders: ["authorization", "Content-Type"],
+		exposedHeaders: ["authorization"],
+		origin: "*",
+		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+		preflightContinue: false
 	})
+)
+app.use(routes);
 
+
+app.listen(PORT, () => console.log(`🔥 Server started at http://localhost:${PORT}`))
