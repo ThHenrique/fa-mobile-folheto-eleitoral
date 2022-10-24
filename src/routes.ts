@@ -13,5 +13,7 @@ const router = Router();
 router.get('/', Welcome.getWelcome);
 
 router.get('/candidates', CandidateController.index);
+router.get('/candidates/:politicalParty', CandidateController.candidatesByPoliticalParty);
+router.get('/candidate/:name', CandidateController.show);
 
 export default router;

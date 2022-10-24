@@ -8,9 +8,6 @@ import routes from './routes';
 
 import MongoDbClient from './database/index'
 
-MongoDbClient
-	.initialize()
-
 const PORT = process.env.PORT || 3333
 
 const app = express();
@@ -24,7 +21,11 @@ app.use(
 		preflightContinue: false
 	})
 )
-app.use(routes);
 
+MongoDbClient
+	.initialize()
+	.then(() => {
+		app.use(routes);
+	})
 
 app.listen(PORT, () => console.log(`🔥 Server started at http://localhost:${PORT}`))

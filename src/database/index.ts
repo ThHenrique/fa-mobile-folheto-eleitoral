@@ -4,7 +4,7 @@ const uri = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${p
 
 class MongoDbClient {
 	private mongoClient: MongoClient;
-	public db: Db;
+	private db: Db;
 
 	constructor() {
 		this.mongoClient = new MongoClient(uri)
@@ -22,6 +22,10 @@ class MongoDbClient {
 
 			console.log(`Error during connection to database`);
 		}
+	}
+
+	public get candidateCollection() {
+		return this.db.collection('candidatos2022');
 	}
 
 }
