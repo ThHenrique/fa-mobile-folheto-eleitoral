@@ -29,7 +29,7 @@ const writableStreamFile = new Writable({
 			}
 			return value
 		})
-		const candidatos = Database.db.collection('candidatos2022')
+		const candidatos = Database.candidateCollection
 		async function handleData(rowData: any) {
 			try {
 				await candidatos.insertOne(rowData)

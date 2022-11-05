@@ -28,6 +28,10 @@ class MongoDbClient {
 		return this.db.collection('candidatos2022');
 	}
 
+	public get userCollection() {
+		return this.db.collection('users');
+	}
+
 }
 
 export default new MongoDbClient();
