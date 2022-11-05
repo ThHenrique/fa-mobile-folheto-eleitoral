@@ -6,7 +6,10 @@ class CandidateRepository {
 		const candidateCollection = Database.candidateCollection
 
 		try {
-			const cursor = await candidateCollection.find({}).toArray();
+			const cursor = await candidateCollection.find({
+				DS_CARGO: "GOVERNADOR",
+				SG_UE: "SP"
+			}).toArray();
 			return cursor
 		} catch (error) {
 			return []
@@ -19,6 +22,8 @@ class CandidateRepository {
 		try {
 			const candidate = await candidateCollection.findOne({
 				NM_CANDIDATO: name,
+				DS_CARGO: "GOVERNADOR",
+				SG_UE: "SP"
 			})
 
 			return candidate
@@ -32,7 +37,11 @@ class CandidateRepository {
 
 		try {
 			const candidate = await candidateCollection.find({
-				NM_PARTIDO: politicalParty,
+				$or: [
+					{ NM_PARTIDO: politicalParty, DS_CARGO: "GOVERNADOR", SG_UE: "SP" },
+					{ SG_PARTIDO: politicalParty, DS_CARGO: "GOVERNADOR", SG_UE: "SP" }
+				]
+
 			}).toArray()
 
 			return candidate
