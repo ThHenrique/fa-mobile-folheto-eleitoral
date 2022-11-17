@@ -1,10 +1,11 @@
 import React from 'react';
-import {CandidateDetails} from './pages/CandidateDetails';
+
+import Routes from './routes';
 
 const App = () => {
   return (
     <>
-      <CandidateDetails />
+      <Routes />
     </>
   );
 };

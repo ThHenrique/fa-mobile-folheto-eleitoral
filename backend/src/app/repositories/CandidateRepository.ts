@@ -21,7 +21,7 @@ class CandidateRepository {
 
 		try {
 			const candidate = await candidateCollection.findOne({
-				NM_CANDIDATO: name,
+				NM_CANDIDATO: name.toLocaleUpperCase(),
 				DS_CARGO: "GOVERNADOR",
 				SG_UE: "SP"
 			})

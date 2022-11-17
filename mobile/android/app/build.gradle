@@ -311,3 +311,14 @@ def isNewArchitectureEnabled() {
     // - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
     return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
 }
+
+// react-native-vector-icons - Setup
+
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
+// react-native-vector-icons - Custom
+
+project.ext.vectoricons = [
+    iconFontNames: [ 'MaterialIcons.ttf', 'FontAwesome.ttf', 'FontAwesome5.ttf'  ] // Name of the font files you want to copy
+]
+

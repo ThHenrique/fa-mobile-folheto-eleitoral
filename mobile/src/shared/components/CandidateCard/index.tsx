@@ -1,18 +1,27 @@
 import React from 'react';
 
-import {Image, Text, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 
 import {styles} from './styles';
 
-export function CandidateCard() {
+interface CandidateCardProps {
+  name: string;
+  role: string;
+  number: number;
+  image?: string;
+}
+
+export function CandidateCard({name, role, number}: CandidateCardProps) {
   return (
-    <View style={styles.card}>
-      <Image style={styles.candidateImage} />
-      <View>
-        <Text style={styles.cardTitle}>Lorem Ipsum doler</Text>
-        <Text style={styles.roleText}>Governador</Text>
-        <Text style={styles.candidateNumberText}>240</Text>
+    <TouchableOpacity onPress={() => {}}>
+      <View style={styles.card}>
+        <Image style={styles.candidateImage} />
+        <View>
+          <Text style={styles.cardTitle}>{name}</Text>
+          <Text style={styles.roleText}>{role}</Text>
+          <Text style={styles.candidateNumberText}>{number}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

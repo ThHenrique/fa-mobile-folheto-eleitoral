@@ -5,24 +5,50 @@ export const styles = StyleSheet.create({
     flex: 1,
 
     padding: 10,
-    backgroundColor: '#f1f1f1',
   },
 
-  inputBox: {
+  inputBoxView: {
     backgroundColor: '#ffffff',
 
     borderWidth: 1.4,
     borderColor: '#d3e2e5',
-    borderRadius: 5,
+    borderRadius: 20,
     height: 56,
-    paddingVertical: 18,
+
+    marginBottom: 6,
+
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  inputBox: {
+    flex: 1,
     paddingHorizontal: 24,
-    marginBottom: 16,
 
     fontWeight: '500',
     fontSize: 16,
     lineHeight: 32,
     color: '#5c8599',
+  },
+
+  inputIcon: {
+    width: 40,
+  },
+
+  cleanSearchView: {
+    marginBottom: 10,
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+
+  cleanSearchText: {
+    color: '#22215b',
+    fontWeight: '500',
+    textDecorationLine: 'underline',
+
+    marginLeft: 5,
   },
 
   candidateList: {

@@ -1,9 +1,19 @@
 import React from 'react';
+
+import {useNavigation, StackActions} from '@react-navigation/native';
+
 import {Image, Text, TouchableOpacity, View} from 'react-native';
+
+import {PropsStack} from '../../shared/types/rootStackParamList';
 
 import {styles} from './styles';
 
 export function Splash() {
+  const navigation = useNavigation<PropsStack>();
+
+  function goToApp() {
+    navigation.dispatch(StackActions.replace('SearchCandidate'));
+  }
   return (
     <View style={styles.container}>
       {/* <Modal animationType="slide" visible={true}>
@@ -19,7 +29,7 @@ export function Splash() {
         lixo eleitoral.
       </Text>
       <Text style={styles.simpleText}>Entre é de graça.</Text>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={goToApp}>
         <Text style={styles.buttonText}>ACESSAR</Text>
       </TouchableOpacity>
     </View>

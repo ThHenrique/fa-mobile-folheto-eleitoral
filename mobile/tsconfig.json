@@ -8,5 +8,6 @@
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "esModuleInterop": true,
     "noImplicitAny": false, /* Raise error on expressions and declarations with an implied 'any' type. */
+    "allowJs": true,
   }
 }

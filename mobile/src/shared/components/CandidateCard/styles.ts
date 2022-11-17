@@ -29,6 +29,9 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 24,
 
+    flexWrap: 'wrap',
+    maxWidth: 270,
+
     color: '#22215b',
   },
 
@@ -41,8 +44,8 @@ export const styles = StyleSheet.create({
   },
 
   candidateNumberText: {
-    fontWeight: '500',
-    fontSize: 16,
+    fontWeight: '600',
+    fontSize: 20,
     lineHeight: 32,
 
     color: '#4364c7',
