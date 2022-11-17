@@ -3,7 +3,11 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 
 import {styles} from './styles';
 
-export function VotingIntentionSucessModal() {
+export function VotingIntentionSucessModal({
+  handleModalVisible,
+}: {
+  handleModalVisible: () => void;
+}) {
   return (
     <View style={styles.container}>
       <Image style={styles.iconLogo} />
@@ -13,7 +17,7 @@ export function VotingIntentionSucessModal() {
         Sua Intenção de voto foi salva. Agora é só esperar as eleições para
         efetivar sua intenção{':)'}
       </Text>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleModalVisible}>
         <Text style={styles.buttonText}>OK</Text>
       </TouchableOpacity>
     </View>

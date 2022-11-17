@@ -16,9 +16,6 @@ export function Splash() {
   }
   return (
     <View style={styles.container}>
-      {/* <Modal animationType="slide" visible={true}>
-        <VotingIntentionSucessModal />
-      </Modal> */}
       <Image style={styles.iconLogo} />
       <Text style={styles.welcomeText}>Bem Vindo ao</Text>
       <Text style={styles.projectNameText}>Folheto</Text>

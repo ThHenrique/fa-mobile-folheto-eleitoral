@@ -2,8 +2,25 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     flexGrow: 1,
     backgroundColor: '#f1f1f1',
+  },
+
+  goBackView: {
+    position: 'absolute',
+
+    backgroundColor: '#FFFFFF80',
+    height: 30,
+    width: 30,
+
+    top: 20,
+    left: 20,
+    zIndex: 1,
+
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
   },
 
   candidadeImage: {

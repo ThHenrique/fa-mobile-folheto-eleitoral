@@ -1,26 +1,34 @@
 import React, {useEffect, useState} from 'react';
 
-import {useRoute, RouteProp} from '@react-navigation/native';
+import {useNavigation, useRoute, RouteProp} from '@react-navigation/native';
 
 import {
   Alert,
   Image,
+  Modal,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import {styles} from './styles';
 
 import {RootStackParamList} from '../../shared/types/rootStackParamList';
 import CandidateService from '../../shared/services/CandidateService';
 import {ICandidate} from '../../shared/interfaces/ICandidate';
+import {VotingIntentionSucessModal} from '../../shared/components/VotingIntentionSuccess';
 
 export function CandidateDetails() {
   const [candidate, setCandidate] = useState<ICandidate>();
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
 
+  const [showModal, setShowModal] = useState(false);
+
+  const navigation = useNavigation();
   const route = useRoute<RouteProp<RootStackParamList, 'CandidateDetails'>>();
 
   useEffect(() => {
@@ -49,8 +57,19 @@ export function CandidateDetails() {
     return;
   }
 
+  async function handleSaveVoteIntention() {
+    setShowModal(true);
+  }
+
+  function closeSuccessModal() {
+    setShowModal(false);
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <TouchableOpacity style={styles.goBackView} onPress={navigation.goBack}>
+        <Icon name="close" size={15} color="#111" />
+      </TouchableOpacity>
       <Image style={styles.candidadeImage} />
       <View style={styles.candidateSection}>
         <View style={styles.candidateNameContainer}>
@@ -116,9 +135,13 @@ export function CandidateDetails() {
           </View>
         </View>
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleSaveVoteIntention}>
         <Text style={styles.buttonText}>INTENÇÃO DE VOTO</Text>
       </TouchableOpacity>
+
+      <Modal animationType="slide" visible={showModal}>
+        <VotingIntentionSucessModal handleModalVisible={closeSuccessModal} />
+      </Modal>
     </ScrollView>
   );
 }
