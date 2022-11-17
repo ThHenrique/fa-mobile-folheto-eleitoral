@@ -9,7 +9,9 @@ import {Splash} from './pages/Splash';
 import {CandidateDetails} from './pages/CandidateDetails';
 import {VotingIntention} from './pages/VotingIntention';
 
-const {Navigator, Screen} = createNativeStackNavigator();
+import {RootStackParamList} from './shared/types/rootStackParamList';
+
+const {Navigator, Screen} = createNativeStackNavigator<RootStackParamList>();
 
 export default function Routes() {
   return (

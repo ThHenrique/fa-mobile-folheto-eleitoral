@@ -40,7 +40,7 @@ export interface ICandidate {
   DS_ESTADO_CIVIL: string;
   DS_COR_RACA: string;
   DS_OCUPACAO: string;
-  VR_DESPESA_MAX_CAMPANHA: string;
+  VR_DESPESA_MAX_CAMPANHA: number;
   DS_SIT_TOT_TURNO: string;
   ST_REELEICAO: boolean;
   ST_DECLARAR_BENS: boolean;

@@ -1,9 +1,9 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-type RootStackParamList = {
+export type RootStackParamList = {
   Splash: undefined;
   SearchCandidate: undefined;
-  CandidateDetails: undefined;
+  CandidateDetails: {id: string; name: string};
   VotingIntention: undefined;
 };
 

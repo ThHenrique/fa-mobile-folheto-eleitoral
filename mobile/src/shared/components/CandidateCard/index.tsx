@@ -1,19 +1,32 @@
 import React from 'react';
 
+import {useNavigation} from '@react-navigation/native';
+
 import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {PropsStack} from '../../types/rootStackParamList';
 
 import {styles} from './styles';
 
 interface CandidateCardProps {
+  id: string;
   name: string;
   role: string;
   number: number;
   image?: string;
 }
 
-export function CandidateCard({name, role, number}: CandidateCardProps) {
+export function CandidateCard({id, name, role, number}: CandidateCardProps) {
+  const navigation = useNavigation<PropsStack>();
+
+  function goToCandidate() {
+    navigation.navigate('CandidateDetails', {
+      id,
+      name,
+    });
+  }
+
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableOpacity onPress={goToCandidate}>
       <View style={styles.card}>
         <Image style={styles.candidateImage} />
         <View>

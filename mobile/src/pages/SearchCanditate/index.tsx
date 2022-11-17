@@ -75,6 +75,7 @@ export function SearchCandidate() {
         {candidates.map(candidate => (
           <CandidateCard
             key={candidate.id}
+            id={candidate.id}
             name={candidate.NM_CANDIDATO}
             role={candidate.DS_CARGO}
             number={candidate.NR_CANDIDATO}

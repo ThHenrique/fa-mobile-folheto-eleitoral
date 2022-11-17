@@ -8,14 +8,19 @@ export const styles = StyleSheet.create({
 
   candidadeImage: {
     backgroundColor: '#111',
-    height: 435,
+    height: 405,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
 
   candidateSection: {
-    marginVertical: 36,
+    marginVertical: 16,
     paddingHorizontal: 20,
+  },
+
+  candidateSectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 
   voteText: {
@@ -28,7 +33,7 @@ export const styles = StyleSheet.create({
   },
 
   candidateNameContainer: {
-    marginVertical: 32,
+    marginVertical: 16,
   },
 
   fisrtNameText: {
@@ -43,6 +48,8 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     letterSpacing: 15,
     textAlign: 'center',
+
+    flexWrap: 'wrap',
   },
 
   aboutCandidateSection: {
