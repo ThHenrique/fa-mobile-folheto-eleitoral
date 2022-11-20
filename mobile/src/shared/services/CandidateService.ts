@@ -9,7 +9,7 @@ class CandidateService {
 
       return data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return [];
     }
   }
@@ -20,7 +20,7 @@ class CandidateService {
 
       return data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return null;
     }
   }
