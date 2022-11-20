@@ -2,7 +2,6 @@ import { ObjectId } from 'mongodb';
 
 import bcrypt from "bcryptjs";
 
-
 import Database from '../../database'
 
 import { IUser, IUserCreateDTO } from '../interfaces/IUser';
