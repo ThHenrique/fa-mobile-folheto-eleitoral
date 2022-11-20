@@ -72,10 +72,6 @@ export function CandidateDetails() {
       </TouchableOpacity>
       <Image style={styles.candidadeImage} />
       <View style={styles.candidateSection}>
-        <View style={styles.candidateNameContainer}>
-          <Text style={styles.fisrtNameText}>{firstname}</Text>
-          <Text style={styles.lastNameText}>{lastname}</Text>
-        </View>
         <View style={styles.candidateSectionHeader}>
           <View>
             <Text style={styles.voteText}>{candidate?.DS_CARGO}</Text>
@@ -85,6 +81,10 @@ export function CandidateDetails() {
             <Text style={styles.voteText}>Vote</Text>
             <Text style={styles.numberVoteText}>{candidate?.NR_CANDIDATO}</Text>
           </View>
+        </View>
+        <View style={styles.candidateNameContainer}>
+          <Text style={styles.fisrtNameText}>{firstname}</Text>
+          <Text style={styles.lastNameText}>{lastname}</Text>
         </View>
         <View style={styles.aboutCandidateSection}>
           <Text style={styles.aboutTitle}>Sobre o candidato</Text>

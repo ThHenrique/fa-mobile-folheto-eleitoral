@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
   },
 
   iconLogo: {
-    backgroundColor: '#f1f1',
     alignSelf: 'center',
 
     width: 155,

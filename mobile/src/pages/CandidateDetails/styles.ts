@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
 
   candidadeImage: {
     backgroundColor: '#111',
-    height: 405,
+    height: 300,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
@@ -41,11 +41,11 @@ export const styles = StyleSheet.create({
   },
 
   voteText: {
-    fontSize: 32,
+    fontSize: 24,
   },
 
   numberVoteText: {
-    fontSize: 56,
+    fontSize: 32,
     fontWeight: '700',
   },
 
@@ -54,14 +54,14 @@ export const styles = StyleSheet.create({
   },
 
   fisrtNameText: {
-    fontSize: 42,
+    fontSize: 36,
     fontWeight: '700',
     letterSpacing: 5,
     textAlign: 'center',
   },
 
   lastNameText: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: '500',
     letterSpacing: 15,
     textAlign: 'center',

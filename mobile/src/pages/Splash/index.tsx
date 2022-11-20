@@ -6,6 +6,8 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 
 import {PropsStack} from '../../shared/types/rootStackParamList';
 
+const Logo = require('../../shared/assets/img/Logo.png');
+
 import {styles} from './styles';
 
 export function Splash() {
@@ -16,7 +18,7 @@ export function Splash() {
   }
   return (
     <View style={styles.container}>
-      <Image style={styles.iconLogo} />
+      <Image style={styles.iconLogo} source={Logo} />
       <Text style={styles.welcomeText}>Bem Vindo ao</Text>
       <Text style={styles.projectNameText}>Folheto</Text>
       <Text style={styles.projectNameOrangeText}>Eleitoral Digital</Text>
