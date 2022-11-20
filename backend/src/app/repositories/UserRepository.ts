@@ -1,5 +1,8 @@
 import { ObjectId } from 'mongodb';
 
+import bcrypt from "bcryptjs";
+
+
 import Database from '../../database'
 
 import { IUser, IUserCreateDTO } from '../interfaces/IUser';
@@ -13,6 +16,9 @@ class UserRepository {
 			const userExists = await this.findByEmail(user.email)
 
 			if (!userExists) {
+
+				user.password = bcrypt.hashSync(user.password, 8)
+
 				const userCreated = await userCollection.insertOne(user);
 
 				const newUser: IUser = {
@@ -62,7 +68,7 @@ class UserRepository {
 
 			return user
 		} catch (error) {
-			return {}
+			return null
 		}
 	}
 
