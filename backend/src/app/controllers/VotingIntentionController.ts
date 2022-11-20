@@ -9,10 +9,9 @@ class VotingIntentionController {
 	async store(req: Request, res: Response) {
 		const newCandidate: ICandidate = req.body
 
-		const { userId } = req.params
+		const userId = req.userId
 
 		const result = await VotingIntentionRepository.create(newCandidate, userId)
-		console.log(result);
 
 		if (!result) {
 			return res.status(400).json({ error: 'Candidate not added to voting intention' });
@@ -29,9 +28,9 @@ class VotingIntentionController {
 	}
 
 	async show(req: Request, res: Response) {
-		const { id } = req.params;
+		const userId = req.userId;
 
-		const votingIntentionFound = await VotingIntentionRepository.findByUser(id);
+		const votingIntentionFound = await VotingIntentionRepository.findByUser(userId);
 
 		if (!votingIntentionFound) {
 			return res.status(404).json({ error: 'User or voting intention list not found' });
@@ -41,7 +40,9 @@ class VotingIntentionController {
 	}
 
 	async delete(req: Request, res: Response) {
-		const { name, userId } = req.params
+		const { name } = req.params
+
+		const userId = req.userId
 
 		const votingIntentionRemoved = await VotingIntentionRepository.delete(userId, name)
 

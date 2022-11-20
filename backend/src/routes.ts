@@ -1,5 +1,8 @@
 import { Request, Response, Router } from 'express';
 
+import authMiddleware from './app/middlewares/authMiddleware';
+
+import AuthController from './app/controllers/AuthController';
 import CandidateController from './app/controllers/CandidateController';
 import UserController from './app/controllers/UserController';
 import VotingIntentionController from './app/controllers/VotingIntentionController';
@@ -14,6 +17,8 @@ const router = Router();
 
 router.get('/', Welcome.getWelcome);
 
+router.post('/authenticate', AuthController.authenticate);
+
 router.get('/candidate/:name', CandidateController.show);
 router.get('/candidates', CandidateController.index);
 router.get('/candidates/politicalParty/:politicalParty', CandidateController.candidatesByPoliticalParty);
@@ -22,9 +27,8 @@ router.get('/user/:email', UserController.show)
 router.get('/users', UserController.index)
 router.post('/user', UserController.store)
 
-router.get('/votingIntention/:id', VotingIntentionController.show)
-router.get('/votingIntention', VotingIntentionController.index)
-router.post('/votingIntention/:userId', VotingIntentionController.store)
-router.delete('/votingIntention/:userId/:name', VotingIntentionController.delete)
+router.get('/votingIntention', authMiddleware, VotingIntentionController.show)
+router.post('/votingIntention', authMiddleware, VotingIntentionController.store)
+router.delete('/votingIntention/:name', authMiddleware, VotingIntentionController.delete)
 
 export default router;
