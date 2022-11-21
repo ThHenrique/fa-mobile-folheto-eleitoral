@@ -5,6 +5,7 @@ export type RootStackParamList = {
   SearchCandidate: undefined;
   CandidateDetails: {id: string; name: string};
   VotingIntention: undefined;
+  SignIn: undefined;
 };
 
 export type PropsStack = NativeStackNavigationProp<RootStackParamList>;

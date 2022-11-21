@@ -14,7 +14,7 @@ export function Splash() {
   const navigation = useNavigation<PropsStack>();
 
   function goToApp() {
-    navigation.dispatch(StackActions.replace('SearchCandidate'));
+    navigation.dispatch(StackActions.replace('SignIn'));
   }
   return (
     <View style={styles.container}>
@@ -28,6 +28,7 @@ export function Splash() {
         lixo eleitoral.
       </Text>
       <Text style={styles.simpleText}>Entre é de graça.</Text>
+
       <TouchableOpacity style={styles.button} onPress={goToApp}>
         <Text style={styles.buttonText}>ACESSAR</Text>
       </TouchableOpacity>

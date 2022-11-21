@@ -10,6 +10,7 @@ import {CandidateDetails} from './pages/CandidateDetails';
 import {VotingIntention} from './pages/VotingIntention';
 
 import {RootStackParamList} from './shared/types/rootStackParamList';
+import {SignIn} from './pages/SignIn';
 
 const {Navigator, Screen} = createNativeStackNavigator<RootStackParamList>();
 
@@ -26,6 +27,7 @@ export default function Routes() {
         <Screen name="SearchCandidate" component={SearchCandidate} />
         <Screen name="CandidateDetails" component={CandidateDetails} />
         <Screen name="VotingIntention" component={VotingIntention} />
+        <Screen name="SignIn" component={SignIn} />
       </Navigator>
     </NavigationContainer>
   );
