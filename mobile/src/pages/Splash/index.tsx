@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useContext} from 'react';
 
 import {useNavigation, StackActions} from '@react-navigation/native';
 
@@ -9,13 +9,22 @@ import {PropsStack} from '../../shared/types/rootStackParamList';
 const Logo = require('../../shared/assets/img/Logo.png');
 
 import {styles} from './styles';
+import SessionController from '../../shared/utils/handler/SessionController';
 
 export function Splash() {
   const navigation = useNavigation<PropsStack>();
 
-  function goToApp() {
+  async function goToApp() {
+    const verifyToken = await SessionController.getToken();
+
+    if (verifyToken) {
+      navigation.dispatch(StackActions.replace('SearchCandidate'));
+      return;
+    }
+
     navigation.dispatch(StackActions.replace('SignIn'));
   }
+
   return (
     <View style={styles.container}>
       <Image style={styles.iconLogo} source={Logo} />

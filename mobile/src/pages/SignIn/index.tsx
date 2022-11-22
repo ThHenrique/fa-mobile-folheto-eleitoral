@@ -1,12 +1,20 @@
-import {StackActions, useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {StackActions, useNavigation} from '@react-navigation/native';
+
+import {View, Text, TouchableOpacity, TextInput, Alert} from 'react-native';
+
+import AuthService from '../../shared/services/AuthService';
+
+import {AuthContext} from '../../shared/context/AuthContext';
+
 import {PropsStack} from '../../shared/types/rootStackParamList';
 
 import {styles} from './styles';
 
 export function SignIn() {
+  const {saveUserDataInStorage} = useContext(AuthContext);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,7 +24,21 @@ export function SignIn() {
     navigation.dispatch(StackActions.replace('SearchCandidate'));
   }
 
-  function handleSignIn() {}
+  async function handleSignIn() {
+    const form = {
+      email,
+      password,
+    };
+
+    const response = await AuthService.authenticate(form);
+
+    if (response) {
+      saveUserDataInStorage(response);
+      goToApp();
+    } else {
+      Alert.alert('Não foi possível realizar o login, tente novamente!');
+    }
+  }
 
   return (
     <View style={styles.container}>

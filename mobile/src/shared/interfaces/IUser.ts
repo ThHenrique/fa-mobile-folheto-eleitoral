@@ -12,3 +12,7 @@ export interface IUserCreateDTO {
   email: string;
   password: string;
 }
+
+export interface IUserAuthenticated extends IUser {
+  token: string;
+}
