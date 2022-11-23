@@ -2,9 +2,14 @@ import fs from 'fs'
 import csv from 'csv-parser'
 import { Writable, Transform } from 'stream'
 
+import * as dotenv from 'dotenv'
+dotenv.config();
+
 import Database from '../../database'
 
-const readableStreamFile = fs.createReadStream('../data_csv/candidatos-2022/consulta_cand_2022_SP.csv', {
+import CandidateImage from './CandidateImage'
+
+const readableStreamFile = fs.createReadStream('../../data_csv/candidatos-2022/consulta_cand_2022_SP.csv', {
 	encoding: 'latin1',
 })
 const transformToObject = csv({ separator: ';' })
@@ -32,9 +37,13 @@ const writableStreamFile = new Writable({
 		const candidatos = Database.candidateCollection
 		async function handleData(rowData: any) {
 			try {
+				const candidateImage = await CandidateImage.getImage(rowData.SQ_CANDIDATO)
+
+				rowData.image = candidateImage
+
 				await candidatos.insertOne(rowData)
 			} catch (error) {
-				console.log(error);
+				console.error(`Candidate ${rowData.SQ_CANDIDATO} NOT ADDED to collection`, error);
 			}
 		}
 		handleData(rowData)
@@ -45,11 +54,18 @@ const writableStreamFile = new Writable({
 
 console.log('INICIOU', Date());
 
-readableStreamFile
-	.pipe(transformToObject)
-	.pipe(transformToString)
-	.pipe(writableStreamFile)
-	.on('close', async () => {
-		console.log('FINALIZOU', Date())
+Database
+	.initialize()
+	.then(() => {
+		readableStreamFile
+			.pipe(transformToObject)
+			.pipe(transformToString)
+			.pipe(writableStreamFile)
+			.on('close', async () => {
+				console.log('FINALIZOU', Date())
+			})
 	})
+	.catch(() => console.log('Error on conection DB '))
+
+
 
