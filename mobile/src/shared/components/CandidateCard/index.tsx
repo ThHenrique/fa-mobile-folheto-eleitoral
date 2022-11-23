@@ -15,7 +15,13 @@ interface CandidateCardProps {
   image?: string;
 }
 
-export function CandidateCard({id, name, role, number}: CandidateCardProps) {
+export function CandidateCard({
+  id,
+  name,
+  role,
+  number,
+  image,
+}: CandidateCardProps) {
   const navigation = useNavigation<PropsStack>();
 
   function goToCandidate() {
@@ -28,7 +34,11 @@ export function CandidateCard({id, name, role, number}: CandidateCardProps) {
   return (
     <TouchableOpacity onPress={goToCandidate}>
       <View style={styles.card}>
-        <Image style={styles.candidateImage} />
+        <Image
+          source={{uri: image}}
+          resizeMode="cover"
+          style={styles.candidateImage}
+        />
         <View>
           <Text style={styles.cardTitle}>{name}</Text>
           <Text style={styles.roleText}>{role}</Text>

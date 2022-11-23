@@ -108,6 +108,7 @@ export function SearchCandidate() {
             name={candidate.NM_CANDIDATO}
             role={candidate.DS_CARGO}
             number={candidate.NR_CANDIDATO}
+            image={candidate.image?.base64}
           />
         ))}
       </ScrollView>

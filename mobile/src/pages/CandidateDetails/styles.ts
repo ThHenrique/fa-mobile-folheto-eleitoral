@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
 
   candidadeImage: {
     backgroundColor: '#111',
-    height: 300,
+    height: 380,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },

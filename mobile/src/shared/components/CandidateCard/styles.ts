@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
     height: 70,
 
     background: '#000000',
+    borderRadius: 3,
   },
 
   cardTitle: {

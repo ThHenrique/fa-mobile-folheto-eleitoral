@@ -70,7 +70,11 @@ export function CandidateDetails() {
       <TouchableOpacity style={styles.goBackView} onPress={navigation.goBack}>
         <Icon name="close" size={15} color="#111" />
       </TouchableOpacity>
-      <Image style={styles.candidadeImage} />
+      <Image
+        source={{uri: candidate?.image?.base64}}
+        resizeMode="contain"
+        style={styles.candidadeImage}
+      />
       <View style={styles.candidateSection}>
         <View style={styles.candidateSectionHeader}>
           <View>
