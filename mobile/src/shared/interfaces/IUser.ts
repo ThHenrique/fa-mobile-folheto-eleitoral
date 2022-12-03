@@ -13,6 +13,7 @@ export interface IUserCreateDTO {
   password: string;
 }
 
-export interface IUserAuthenticated extends IUser {
+export interface IUserAuthenticated {
+  user: IUser;
   token: string;
 }

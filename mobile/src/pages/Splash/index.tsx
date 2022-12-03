@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React from 'react';
 
 import {useNavigation, StackActions} from '@react-navigation/native';
 
@@ -18,7 +18,7 @@ export function Splash() {
     const verifyToken = await SessionController.getToken();
 
     if (verifyToken) {
-      navigation.dispatch(StackActions.replace('SearchCandidate'));
+      navigation.dispatch(StackActions.replace('Home'));
       return;
     }
 

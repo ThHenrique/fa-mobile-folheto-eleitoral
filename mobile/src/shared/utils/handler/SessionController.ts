@@ -25,6 +25,7 @@ class SessionController {
   }
 
   async clearUserInfo() {
+    await AsyncStorage.removeItem('authentication_token');
     await AsyncStorage.removeItem('user_data');
   }
 

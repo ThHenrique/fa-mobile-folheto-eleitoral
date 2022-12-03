@@ -36,13 +36,13 @@ const AuthProvider: React.FC<Props> = ({children}) => {
   }
 
   async function saveUserDataInStorage(data: IUserAuthenticated) {
-    await SessionController.setUserInfo(data);
+    await SessionController.setUserInfo(data.user);
     await SessionController.setToken(data.token);
-    setUserInfo(data);
+    setUserInfo(data.user);
   }
 
-  function handleClearUserInfo() {
-    SessionController.clearUserInfo();
+  async function handleClearUserInfo() {
+    await SessionController.clearUserInfo();
     setUserInfo(null);
   }
 

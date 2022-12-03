@@ -21,7 +21,14 @@ export function SignIn() {
   const navigation = useNavigation<PropsStack>();
 
   function goToApp() {
-    navigation.dispatch(StackActions.replace('SearchCandidate'));
+    navigation.dispatch(StackActions.replace('Home'));
+  }
+
+  function goToSignUp() {
+    navigation.navigate('SignUp', {
+      email,
+      password,
+    });
   }
 
   async function handleSignIn() {
@@ -36,7 +43,7 @@ export function SignIn() {
       saveUserDataInStorage(response);
       goToApp();
     } else {
-      Alert.alert('Não foi possível realizar o login, tente novamente!');
+      Alert.alert('Email ou senha incorreto, tente novamente!');
     }
   }
 
@@ -68,6 +75,7 @@ export function SignIn() {
             placeholder="Senha"
             textContentType="password"
             style={styles.inputBox}
+            secureTextEntry={true}
           />
         </View>
 
@@ -78,7 +86,7 @@ export function SignIn() {
 
       <Text style={styles.textSignUp}>
         Ainda não possuí cadastro ?{' '}
-        <Text style={styles.buttonInlineText} onPress={() => {}}>
+        <Text style={styles.buttonInlineText} onPress={goToSignUp}>
           Criar conta agora
         </Text>
       </Text>
