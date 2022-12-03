@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import {useNavigation, useRoute, RouteProp} from '@react-navigation/native';
 
@@ -20,8 +20,11 @@ import {RootStackParamList} from '../../shared/types/rootStackParamList';
 import CandidateService from '../../shared/services/CandidateService';
 import {ICandidate} from '../../shared/interfaces/ICandidate';
 import {VotingIntentionSucessModal} from '../../shared/components/VotingIntentionSuccess';
+import {AuthContext} from '../../shared/context/AuthContext';
 
 export function CandidateDetails() {
+  const {userInfo} = useContext(AuthContext);
+
   const [candidate, setCandidate] = useState<ICandidate>();
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -139,9 +142,13 @@ export function CandidateDetails() {
           </View>
         </View>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleSaveVoteIntention}>
-        <Text style={styles.buttonText}>INTENÇÃO DE VOTO</Text>
-      </TouchableOpacity>
+      {userInfo && (
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleSaveVoteIntention}>
+          <Text style={styles.buttonText}>INTENÇÃO DE VOTO</Text>
+        </TouchableOpacity>
+      )}
 
       <Modal animationType="slide" visible={showModal}>
         <VotingIntentionSucessModal handleModalVisible={closeSuccessModal} />
