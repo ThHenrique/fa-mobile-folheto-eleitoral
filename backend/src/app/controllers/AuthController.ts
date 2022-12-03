@@ -13,7 +13,7 @@ class AuthController {
 		const user = await UserRepository.findByEmail(email)
 
     if (!user) {
-      return null
+      return res.sendStatus(401)
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password)

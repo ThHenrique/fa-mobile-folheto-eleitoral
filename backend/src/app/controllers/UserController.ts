@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 
+import jwt from 'jsonwebtoken';
+
 import UserRepository from "../repositories/UserRepository";
 
 import { IUserCreateDTO } from '../interfaces/IUser';
@@ -15,7 +17,12 @@ class UserController {
 			return res.status(400).json({ error: 'User not created' });
 		}
 
-		return res.status(200).json(userCreated)
+    const token = jwt.sign({ id: userCreated.id }, process.env.SECRET_JWT, { expiresIn: '1d' })
+
+		return res.status(200).json({
+			user: userCreated,
+			token
+		})
 	}
 
 	async index(req: Request, res: Response) {
