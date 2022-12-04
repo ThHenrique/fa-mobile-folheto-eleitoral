@@ -1,7 +1,7 @@
 import {ICandidate} from './ICandidate';
 
 export interface IUser {
-  id: string;
+  _id: string;
   username: string;
   email: string;
   votingIntention?: Array<ICandidate>;

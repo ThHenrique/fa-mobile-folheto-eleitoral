@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
   },
 
   illustrateText: {
+    marginLeft: 5,
     fontWeight: '500',
     fontSize: 15,
     lineHeight: 32,
@@ -42,6 +43,7 @@ export const styles = StyleSheet.create({
   },
 
   counterText: {
+    marginTop: 20,
     fontWeight: '400',
     fontSize: 15,
     lineHeight: 32,

@@ -1,13 +1,15 @@
 import api from './api';
 
-import {ICandidate, ICandidateImage} from '../interfaces/ICandidate';
+import {ICandidate} from '../interfaces/ICandidate';
+
+import CandidateImage from '../utils/handler/CandidateImage';
 
 class CandidateService {
   public async listCandidates() {
     try {
       const {data} = await api.get<Array<ICandidate>>('/candidates');
 
-      const refreshDate = this.handleCandidateImageList(data);
+      const refreshDate = CandidateImage.handleCandidateImageList(data);
 
       return refreshDate;
     } catch (error) {
@@ -21,7 +23,7 @@ class CandidateService {
       const {data} = await api.get<ICandidate>(`/candidate/${name}`);
 
       if (data.image) {
-        const refreshFile = this.createBase64File(data.image);
+        const refreshFile = CandidateImage.createBase64File(data.image);
 
         data.image.base64 = refreshFile;
       }
@@ -44,23 +46,6 @@ class CandidateService {
       console.log(error);
       return 'error';
     }
-  }
-
-  private handleCandidateImageList(candidates: Array<ICandidate>) {
-    return candidates.map(candidate => {
-      if (candidate.image) {
-        candidate.image.base64 = this.createBase64File(candidate.image);
-      }
-      return candidate;
-    });
-  }
-
-  private createBase64File(image: ICandidateImage) {
-    const {extension, base64} = image;
-
-    const base64File = `data:image/${extension};base64,`.concat(base64);
-
-    return base64File;
   }
 }
 

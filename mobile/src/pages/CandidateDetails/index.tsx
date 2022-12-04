@@ -14,13 +14,17 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import {styles} from './styles';
-
 import {RootStackParamList} from '../../shared/types/rootStackParamList';
-import CandidateService from '../../shared/services/CandidateService';
+
 import {ICandidate} from '../../shared/interfaces/ICandidate';
-import {VotingIntentionSucessModal} from '../../shared/components/VotingIntentionSuccess';
+import CandidateService from '../../shared/services/CandidateService';
+import VotingIntentionService from '../../shared/services/VotingIntentionService';
+
 import {AuthContext} from '../../shared/context/AuthContext';
+
+import {VotingIntentionSucessModal} from '../../shared/components/VotingIntentionSuccess';
+
+import {styles} from './styles';
 
 export function CandidateDetails() {
   const {userInfo} = useContext(AuthContext);
@@ -61,7 +65,23 @@ export function CandidateDetails() {
   }
 
   async function handleSaveVoteIntention() {
-    setShowModal(true);
+    if (!candidate) {
+      return;
+    }
+
+    try {
+      const response = await VotingIntentionService.createVotingIntention(
+        candidate._id,
+      );
+
+      if (response) {
+        setShowModal(true);
+      } else {
+        Alert.alert('Não foi possível completar a operação, tente novamente!');
+      }
+    } catch (error) {
+      Alert.alert('Não foi possível completar a operação, tente novamente!');
+    }
   }
 
   function closeSuccessModal() {

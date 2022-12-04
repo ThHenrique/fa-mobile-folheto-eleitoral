@@ -5,7 +5,7 @@ export interface ICandidateImage {
 }
 
 export interface ICandidate {
-  id: string;
+  _id: string;
   NM_CANDIDATO: string;
   NM_EMAIL: string;
   NR_CPF_CANDIDATO: string;

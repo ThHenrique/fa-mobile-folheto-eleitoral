@@ -3,10 +3,10 @@ import React, {useEffect, useState} from 'react';
 import {
   View,
   TextInput,
-  ScrollView,
   Text,
   TouchableOpacity,
   Alert,
+  FlatList,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
@@ -99,19 +99,22 @@ export function SearchCandidate() {
         </TouchableOpacity>
       ) : null}
 
-      <ScrollView style={styles.candidateList}>
+      <View style={styles.candidateList}>
         <Text style={styles.roleText}>Governador</Text>
-        {candidates.map(candidate => (
-          <CandidateCard
-            key={candidate.id}
-            id={candidate.id}
-            name={candidate.NM_CANDIDATO}
-            role={candidate.DS_CARGO}
-            number={candidate.NR_CANDIDATO}
-            image={candidate.image?.base64}
-          />
-        ))}
-      </ScrollView>
+        <FlatList
+          data={candidates}
+          renderItem={({item}) => (
+            <CandidateCard
+              key={item._id}
+              id={item._id}
+              name={item.NM_CANDIDATO}
+              role={item.DS_CARGO}
+              number={item.NR_CANDIDATO}
+              image={item.image?.base64}
+            />
+          )}
+        />
+      </View>
     </View>
   );
 }
