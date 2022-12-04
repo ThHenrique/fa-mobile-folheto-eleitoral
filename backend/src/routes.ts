@@ -28,7 +28,7 @@ router.get('/users', UserController.index)
 router.post('/user', UserController.store)
 
 router.get('/votingIntention', authMiddleware, VotingIntentionController.show)
-router.post('/votingIntention', authMiddleware, VotingIntentionController.store)
-router.delete('/votingIntention/:name', authMiddleware, VotingIntentionController.delete)
+router.post('/votingIntention/:candidateId', authMiddleware, VotingIntentionController.store)
+router.delete('/votingIntention/:candidateId', authMiddleware, VotingIntentionController.delete)
 
 export default router;

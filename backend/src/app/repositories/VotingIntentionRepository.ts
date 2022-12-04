@@ -2,10 +2,10 @@ import { ObjectId } from 'mongodb';
 
 import Database from '../../database'
 
+import CandidateRepository from './CandidateRepository';
 import UserRepository from './UserRepository';
 
 import { ICandidate } from '../interfaces/ICandidate';
-import { IUser } from '../interfaces/IUser';
 
 class VotingIntentionRepository {
 
@@ -15,7 +15,7 @@ class VotingIntentionRepository {
 
 		try {
 
-			const userFound = await UserRepository.findById(userId) as IUser
+			const userFound = await UserRepository.findById(userId)
 
 			if (!userFound) {
 				return null
@@ -59,7 +59,7 @@ class VotingIntentionRepository {
 
 	async findByUser(id: string) {
 		try {
-			const user = await UserRepository.findById(id) as IUser
+			const user = await UserRepository.findById(id)
 
 			return user.votingIntention
 		} catch (error) {
@@ -67,20 +67,21 @@ class VotingIntentionRepository {
 		}
 	}
 
-	async delete(userId: string, candidateName: string) {
+	async delete(userId: string, candidateId: string) {
 
 		const userCollection = Database.userCollection
 
 		try {
 
-			const userFound = await UserRepository.findById(userId) as IUser
+			const userFound = await UserRepository.findById(userId)
+			const candidateFound = await CandidateRepository.findById(candidateId)
 
-			if (!userFound) {
+			if (!userFound || !candidateFound) {
 				return null
 			}
 
 			const votingListUpdated = userFound.votingIntention?.filter(candidate => {
-				return candidate.NM_CANDIDATO !== candidateName
+				return candidate.NR_CPF_CANDIDATO !== candidateFound.NR_CPF_CANDIDATO
 			})
 
 			const listUpdated = await userCollection.updateOne({ _id: new ObjectId(userId) }, {

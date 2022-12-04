@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import { ICandidateImage } from "./ICandidateImage";
 
 export interface ICandidate {
 	id: ObjectId,
@@ -53,5 +54,6 @@ export interface ICandidate {
 	ST_CANDIDATO_INSERIDO_URNA: string,
 	NM_TIPO_DESTINACAO_VOTOS: string,
 	DS_SITUACAO_CANDIDATO_TOT: string,
-	ST_PREST_CONTAS: boolean
+	ST_PREST_CONTAS: boolean,
+	image?: ICandidateImage
 }

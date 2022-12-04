@@ -1,4 +1,7 @@
+import { ObjectId } from 'mongodb';
 import Database from '../../database'
+
+import { ICandidate } from '../interfaces/ICandidate';
 
 class CandidateRepository {
 
@@ -13,6 +16,20 @@ class CandidateRepository {
 			return cursor
 		} catch (error) {
 			return []
+		}
+	}
+
+	async findById(id: string): Promise<ICandidate> {
+		const candidateCollection = Database.candidateCollection
+
+		try {
+			const candidate = await candidateCollection.findOne<ICandidate>({
+				"_id": new ObjectId(id)
+			})
+
+			return candidate
+		} catch (error) {
+			return null
 		}
 	}
 

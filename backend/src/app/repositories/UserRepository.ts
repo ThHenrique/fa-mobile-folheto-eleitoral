@@ -47,15 +47,15 @@ class UserRepository {
 		}
 	}
 
-	async findById(id: ObjectId | string) {
+	async findById(id: ObjectId | string): Promise<IUser> {
 		const userCollection = Database.userCollection
 
 		try {
-			const user = await userCollection.findOne({ _id: new ObjectId(id) })
+			const user = await userCollection.findOne<IUser>({ _id: new ObjectId(id) })
 
 			return user
 		} catch (error) {
-			return {}
+			return null
 		}
 	}
 

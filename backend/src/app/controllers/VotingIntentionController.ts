@@ -1,17 +1,21 @@
 import { Request, Response } from 'express';
 
 import VotingIntentionRepository from "../repositories/VotingIntentionRepository";
-
-import { ICandidate } from '../interfaces/ICandidate';
+import CandidateRepository from "../repositories/CandidateRepository";
 
 class VotingIntentionController {
 
 	async store(req: Request, res: Response) {
-		const newCandidate: ICandidate = req.body
-
+		const { candidateId } = req.params;
 		const userId = req.userId
 
-		const result = await VotingIntentionRepository.create(newCandidate, userId)
+		const candidate = await CandidateRepository.findById(candidateId)
+
+		if (!candidate) {
+			return res.status(400).json({ error: 'Candidate not added to voting intention' });
+		}
+
+		const result = await VotingIntentionRepository.create(candidate, userId)
 
 		if (!result) {
 			return res.status(400).json({ error: 'Candidate not added to voting intention' });
@@ -40,11 +44,11 @@ class VotingIntentionController {
 	}
 
 	async delete(req: Request, res: Response) {
-		const { name } = req.params
+		const { candidateId } = req.params;
 
 		const userId = req.userId
 
-		const votingIntentionRemoved = await VotingIntentionRepository.delete(userId, name)
+		const votingIntentionRemoved = await VotingIntentionRepository.delete(userId, candidateId)
 
 		if (!votingIntentionRemoved) {
 			return res.status(404).json({ error: 'User not found' });
